@@ -1,0 +1,67 @@
+const tag = "notes";
+export default () => ({
+  /*getNote: (id) => new Promise((resolve, reject) => {
+    if (isData(tag)) {
+      resolve(getData(tag).filter(f => f.id === id)[0] || {})
+    } else {
+      reject({message: "Not found!!"})
+    }*/
+    getNote: (id) => new Promise( async (resolve, reject) => {
+      if (isData(tag)) {
+        const response = await axios.get(api+id);
+        resolve(response.data)
+        //resolve([{"Id": 1, "Note": "test shi"},{"Id": 2, "Note": "Niurka"}]/*api.get(`/api/notes/all`)*/)
+      } else {
+        reject({message: "Not found!!"})
+      }
+  }),
+  /*getNotes: () => new Promise((resolve, reject) => {
+    if (isData(tag)) {
+      resolve(getData(tag) || [])
+    } else {
+      reject({message: "Not found!!"})
+    }  
+  }),*/
+  getNotes: () => new Promise( async (resolve, reject) => {
+    if (true) {
+      const response = await axios.get(api+'all');
+      resolve(response.data)
+    } else {
+      reject({message: "Not found!!"})
+    }  
+  }),
+  addNote: (note) => new Promise( async (resolve, reject) => {
+    const all = await axios.get(api+'all');
+    const count = all.data.size();
+    const pass = { Id : count+1, "note": note };
+    const response = await axios.post(api+"post", pass);
+    if (note) {
+      resolve()
+    } else {
+      reject({message: "Error"})
+    }
+  }),
+  updateNote: (note) => new Promise( async (resolve, reject) => {
+    if (note) {
+    const all = await axios.get(api+'all');
+    const match = all.map(n => n.id == note.id);
+    const pass = { Id : match.id, "note": note };
+    const response = await axios.put(api+match.id, pass);
+    resolve()
+    } else {
+      reject({message: "Error"})
+    }
+  }),
+  deleteNote: (id) => new Promise(async (resolve, reject) => {
+    if (isData(tag)) {
+      await axios.delete(api+id);
+      resolve()
+    } else {
+      reject({message: "Error"})
+    }
+  }),
+  clearNotes: () => new Promise((resolve) => {
+    clearData(tag);
+    resolve();
+  })
+})

@@ -9,6 +9,37 @@
   }
 }
 
+span.b {
+  
+   border-radius: 30px; 
+   border: 3px solid purple;
+   cursor: pointer; 
+   padding: 5px 10px; 
+   font-weight: bold;
+   margin-right: 10px; 
+   text-align: center; 
+   min-width: 50px;
+   display: inline-block;
+
+}
+
+.category input[type="checkbox"] + span {
+  border-color: pink;
+}
+
+.category input[type="checkbox"]:checked + span {
+  background-color: pink;
+}
+
+input[type="checkbox"] {
+  display: none;
+}
+
+input[type="checkbox"]:checked + span {
+  background: purple;
+  color: white;
+}
+
 .App-header {
   text-align: center;
   background-color: #282c34;

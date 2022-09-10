@@ -4,12 +4,13 @@ import { noteService }         from "../services";
 export const useNotes = () => {
 
   const [notes, setNotes] = useState([]);
+  const [code, setCode] = useState([]);
   const [note, setNote] = useState({});
   const [inUse, setInUse] = useState({});
 
-  const getNotes = () => {
+  const getNotes = (op) => {
     noteService()
-      .getNotes()
+      .getNotes(op)
       .then(res => {
         setNotes(res)
       })
@@ -50,6 +51,41 @@ export const useNotes = () => {
     }, timer)
   };
 
+  const next = () => {
+    noteService()
+    .getNotes(1).then(res => {
+      setNotes(res)
+    })
+};
+
+  const prev = () => {
+    noteService()
+    .getNotes(2).then(res => {
+      setNotes(res)
+    })
+};
+
+const filter = (code) => {
+  noteService()
+  .filter(code).then(res => {
+    setNotes(res)
+  })
+};
+
+const orderbyid = () => {
+  noteService()
+  .order(1).then(res => {
+    setNotes(res)
+  })
+};
+
+const orderbynote = () => {
+  noteService()
+  .order(3).then(res => {
+    setNotes(res)
+  })
+};
+
   const updateNote = (pramNote) => {
     setInUse(previous => ({...previous, updateNote: true}));
     noteService()
@@ -88,8 +124,14 @@ export const useNotes = () => {
   };
 
   return {
+    code,
     notes,
     note,
+    next,
+    prev,
+    orderbyid,
+    orderbynote,
+    filter,
     setNote,
     getNotes,
     save,

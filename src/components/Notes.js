@@ -1,12 +1,15 @@
 import React        from 'react'
 import { NoteForm } from "./index";
 import { useNotes, useButton } from "../hooks";
+import { Toggletag } from "../components"
+import { categories } from "../components"
 
 const Notes = () => {
 
-  const {notes, note, setNote, save, deleteNote, clearNotes, inUse, setInUse} = useNotes();
+  const {notes, note, next, prev, filter, orderbyid, orderbynote, setNote, save, deleteNote, clearNotes, inUse, setInUse} = useNotes();
 
   const {buttonRegister} = useButton();
+
 
   return (
     <div className="row m-0">
@@ -61,7 +64,57 @@ const Notes = () => {
               <small className="text-info">{new Date(n.id).toLocaleString()}</small>
             </div>
           ))}
+           <button
+                className="font-weight-bold position-absolute btn btn-outline-danger all-transition"
+                style={{top: "-4px", right: "15px", padding: "4px 12px 7px"}}
+                onClick={() => {
+                    next(); 
+                }}
+                ref={buttonRegister}>
+                Siguiente
+              </button>
+              <button
+                className="font-weight-bold position-absolute btn btn-outline-secondary all-transition"
+                style={{top: "-4px", right: "120px", padding: "4px 12px 7px"}}
+                onClick={() => {
+                    prev(); 
+                }}
+                ref={buttonRegister}>
+                Anterior
+              </button>
         </div>
+        <div className='tags'>
+                <Toggletag category={categories[0]}/>
+                <Toggletag category={categories[1]}/>
+                <Toggletag category={categories[2]}/>
+                <button
+                className="font-weight-bold position-absolute btn btn-outline-danger all-transition"
+                style={{bottom: "-4px", right: "15px", padding: "4px 12px 7px"}}
+                onClick={() => {
+                    orderbyid(); 
+                }}
+                ref={buttonRegister}>
+                ordeer by id
+              </button>
+              <button
+                className="font-weight-bold position-absolute btn btn-outline-danger all-transition"
+                style={{bottom: "-4px", right: "140px", padding: "4px 12px 7px"}}
+                onClick={() => {
+                    orderbynote(); 
+                }}
+                ref={buttonRegister}>
+                order by name
+              </button>
+              </div>
+            <div className="row" style={{bottom: "-4px", right: "5px", padding: "4px 12px 7px"}}>
+            <input 
+               className="pa3 bb br3 grow b--none bg-lightest-blue ma2"
+               type = "search" 
+               placeholder = "Search Note" 
+               //empezar la busqueda con un espacio en blanco
+               onChange={event => filter(event.target.value)}
+              />
+            </div>
       </div>
 
     </div>

@@ -2,7 +2,7 @@ import { clearData, getData, isData, setData } from "../data/api";
 import axios                                   from 'axios';
 
 const api = "https://localhost:44384/api/notes";
-const filter = '/filter?PageNumber=1&PageSize=5&tags=';
+const filter = '/filter?PageNumber=1&PageSize=20&tags=';
 const firstPage = '?PageNumber=1&PageSize=10&tags=sma';
 const firstPageByNote = '/order?PageNumber=1&PageSize=30&tags=sma';
 //const nextPage = "?pageNumber=3&pageSize=10";

@@ -1,7 +1,6 @@
 import React        from 'react'
 import { NoteForm } from "./index";
 import { useNotes, useButton } from "../hooks";
-import { Toggletag } from "../components"
 import { categories } from "../components"
 
 const Notes = () => {
@@ -84,9 +83,30 @@ const Notes = () => {
               </button>
         </div>
         <div className='tags'>
-                <Toggletag category={categories[0]}/>
-                <Toggletag category={categories[1]}/>
-                <Toggletag category={categories[2]}/>
+          <label className='tag1'>
+                <input type="checkbox" onClick={ (event) => {
+                  if (event.target.checked) {
+                    filter('s');
+                  } else {  
+                    orderbyid();
+                  } } } /><span class="b">{categories[0]}</span>
+                  </label>
+          <label className='tag2'>
+                <input type="checkbox" onClick={ (event) => {
+                  if (event.target.checked) {
+                    filter('m');
+                  } else {  
+                    orderbyid();
+                  } } } /><span class="b">{categories[1]}</span>
+                  </label>
+          <label className='tag3'>
+                <input type="checkbox" onClick={ (event) => {
+                  if (event.target.checked) {
+                    filter('a');
+                  } else {  
+                    orderbyid();
+                  } } } /><span class="b">{categories[2]}</span>
+                  </label>
                 <button
                 className="font-weight-bold position-absolute btn btn-outline-danger all-transition"
                 style={{bottom: "-4px", right: "15px", padding: "4px 12px 7px"}}
